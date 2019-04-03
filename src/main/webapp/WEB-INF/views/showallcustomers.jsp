@@ -20,9 +20,16 @@
 	
 	<c:url var="deleteLink" value="delete">
 		<c:param name="code" value="${customer.code}"/>
-		<c:param name="name" value="${customer.name}"/>
 	</c:url>
 	<td><a href="${deleteLink}">del</a></a>
+	
+	<c:url var="updateLink" value="update">
+		<c:param name="code" value="${customer.code}"/>
+	</c:url>
+	<td><a href="${updateLink}">modify</a></td>
+	
+	
+	
 </tr>
 </c:forEach>
 </table>

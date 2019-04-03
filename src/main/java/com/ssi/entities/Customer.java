@@ -1,4 +1,4 @@
-package com.ssi;
+package com.ssi.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

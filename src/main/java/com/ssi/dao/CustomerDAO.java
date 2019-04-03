@@ -1,4 +1,4 @@
-package com.ssi;
+package com.ssi.dao;
 
 import java.util.List;
 
@@ -8,7 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ssi.entities.Customer;
 
 @Component
 public class CustomerDAO {
@@ -16,7 +17,22 @@ public class CustomerDAO {
 	@Autowired
 	SessionFactory sessionFactory;	
 
+	public Customer getCustomerById(String code){
+		Session session=sessionFactory.openSession();
+		Customer customer=session.get(Customer.class, code);
+		session.close();
+		return customer;
+	}
 	
+	public void deleteCustomer(String code){
+		Customer customer=new Customer();
+		customer.setCode(code);
+		Session session=sessionFactory.openSession();
+		Transaction tr=session.beginTransaction();
+		session.delete(customer);
+		tr.commit();
+		session.close();
+	}
 	public List<Customer> getAllCustomers(){
 		String hql="from Customer";
 		Session session=sessionFactory.openSession();
@@ -26,10 +42,10 @@ public class CustomerDAO {
 		return customerList;
 	}
 	
-	public void saveCustomer(Customer customer){
+	public void saveOrUpdateCustomer(Customer customer){
 		Session session=sessionFactory.openSession();
 		Transaction tr=session.beginTransaction();
-		session.save(customer);
+		session.saveOrUpdate(customer);
 		tr.commit();
 		session.close();
 	}

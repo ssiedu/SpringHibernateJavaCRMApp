@@ -1,4 +1,4 @@
-package com.ssi;
+package com.ssi.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
